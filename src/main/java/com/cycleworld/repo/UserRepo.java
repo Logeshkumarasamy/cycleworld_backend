@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 
 @Repository
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public interface UserRepo extends CrudRepository<UserDetails,Integer> {
 
-    UserDetails findBygmailId(String gmailId);
+    public UserDetails findBygmailIdAndPassworld(String gmailId , String passworld);
 }

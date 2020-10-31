@@ -3,7 +3,9 @@ package com.cycleworld.Controller;
 import com.cycleworld.Model.UserDetails;
 import com.cycleworld.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -15,7 +17,6 @@ public class UserController {
 
     @PostMapping("/api/user/register")
     public UserDetails createuser(@RequestBody UserDetails userDetails) {
-        System.out.println(userDetails.toString());
         return userServices.createuser(userDetails);
     }
 
@@ -28,6 +29,22 @@ public class UserController {
     public List<UserDetails> getAllUsers() {
 
         return userServices.getAllUser();
+    }
+
+    @PostMapping(value = "/User/login")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public UserDetails loginUser(@RequestBody UserDetails userDetails)  {
+        String TempEmailId = userDetails.getGmailId();
+        String TempPassword = userDetails.getPassworld();
+        UserDetails userDetails1 =null;
+        if (TempEmailId != null && TempPassword != null) {
+           userDetails1 = userServices.factchBypasswordandemailid(TempEmailId ,TempPassword);
+        }
+
+        if (userDetails1 == null){
+            System.out.println("error   ");
+        }
+        return userDetails1;
     }
 
 }
