@@ -17,6 +17,9 @@ public class UserService {
     public UserDetails createuser(UserDetails userDetails) {
         return userrepo.save(userDetails);
     }
+    public void DeleteUser(int id){
+        userrepo.deleteById(id);
+    }
 
     public List<UserDetails> getAllUser() {
         return (List<UserDetails>) userrepo.findAll();

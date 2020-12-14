@@ -3,6 +3,7 @@ package com.cycleworld.Controller;
 import com.cycleworld.Model.UserDetails;
 import com.cycleworld.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,11 @@ public class UserController {
 
         return userServices.getAllUser();
     }
+    @DeleteMapping("/admin/DeleteUser/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public void deleteUser(@PathVariable int id) {
+        userServices.DeleteUser(id);
+    }
 
     @PostMapping(value = "/User/login")
     @CrossOrigin(origins = "http://localhost:4200")
@@ -42,7 +48,7 @@ public class UserController {
         }
 
         if (userDetails1 == null){
-            System.out.println("error   ");
+            System.out.println("error");
         }
         return userDetails1;
     }
